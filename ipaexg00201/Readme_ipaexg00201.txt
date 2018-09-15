@@ -1,19 +1,19 @@
-IPAex�t�H���g�iIPAex�S�V�b�N�j
-�\ �͂��߂ɂ��ǂ݂������� �\
+IPAexフォント（IPAexゴシック）
+― はじめにお読みください ―
 
-IPAex�t�H���g�́AJIS X 0213:2004�ɏ�������TrueType�A�E�g���C���x�[�X��OpenType�t�H���g�ł��B
+IPAexフォントは、JIS X 0213:2004に準拠したTrueTypeアウトラインベースのOpenTypeフォントです。
 
-IPAex�t�H���g�̎g�p�܂��͗��p�ɓ������ẮA�Y�t�́uIPA�t�H���g���C�Z���Xv1.0�v�ɒ�߂�����ɏ]���Ă��������B
-IPAex�t�H���g���g�p���A�������A�܂��͔Еz����s�ׁA���̑��A�uIPA�t�H���g���C�Z���Xv1.0�v�ɒ�߂錠���̗��p���s�����ꍇ�A��̎҂́uIPA�t�H���g���C�Z���Xv1.0�v�ɓ��ӂ������̂ƌ��Ȃ��܂��B
-
-
-IPAex�t�H���g�iIPAex�S�V�b�N�j   ipaexg00201.zip
-|--�͂��߂ɂ��ǂ݂�������   Readme_ipaexg00201.txt
-|--IPA�t�H���g���C�Z���Xv1.0   IPA_Font_License_Agreement_v1.0.txt
-|--IPAex�S�V�b�N(Ver.002.01)   ipaexg.ttf
+IPAexフォントの使用または利用に当たっては、添付の「IPAフォントライセンスv1.0」に定める条件に従ってください。
+IPAexフォントを使用し、複製し、または頒布する行為、その他、「IPAフォントライセンスv1.0」に定める権利の利用を行った場合、受領者は「IPAフォントライセンスv1.0」に同意したものと見なします。
 
 
-�uIPA�t�H���g�v�́AIPA�̓o�^���W�ł��B
+IPAexフォント（IPAexゴシック）   ipaexg00201.zip
+|--はじめにお読みください   Readme_ipaexg00201.txt
+|--IPAフォントライセンスv1.0   IPA_Font_License_Agreement_v1.0.txt
+|--IPAexゴシック(Ver.002.01)   ipaexg.ttf
+
+
+「IPAフォント」は、IPAの登録商標です。
 
 =========================
 IPAex Font (IPAex Gothic)
