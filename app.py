@@ -115,7 +115,7 @@ class RootWidget(GridLayout):
         self.checkbox5.bind(active=self.on_checkbox_active)
         self.add_widget(self.checkbox5)
 
-        self.label=Label(text=u"駐車場",font_size = "15sp", font_name = 'ipaexg00201/ipaexg.ttf')
+        self.label=Label(text=u"駐車場あり",font_size = "15sp", font_name = 'ipaexg00201/ipaexg.ttf')
         self.add_widget(self.label)
         self.checkbox6 = CheckBox()
         self.checkbox6.bind(active=self.on_checkbox_active)
@@ -128,7 +128,7 @@ class RootWidget(GridLayout):
 
         self.btn2=Button(text=u"終了",size_hint = (0.5, 0.5),font_size = "15sp", font_name = 'ipaexg00201/ipaexg.ttf')
         layout = AnchorLayout(anchor_x='center', anchor_y='center')
-        layout.add_widget(self.btn２)
+        layout.add_widget(self.btn2)
         self.add_widget(layout)
 
     def on_checkbox_active(self, checkbox, value):
