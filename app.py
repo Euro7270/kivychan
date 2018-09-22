@@ -6,12 +6,14 @@ from kivy.uix.button import Label,Button
 from kivy.config import Config
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.checkbox import CheckBox
-from kivy.core.window import Window
 from kivy.uix.anchorlayout import AnchorLayout
-from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.textinput import TextInput
-import tkinter.messagebox as tkmsg
-
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.textinput import TextInput
+from kivy.clock import Clock
+from datetime import datetime
+from kivy.core.window import Window
 
 import geocoder
 from bs4 import BeautifulSoup
@@ -19,10 +21,10 @@ import requests
 import webbrowser
 import urllib.parse
 
+
 #ウィンドウを作成
 Config.set('graphics', 'width', '300')
 Config.set('graphics', 'height', '400')
-Window.clearcolor = (0.7, 0.7, 0.7, 0.7)
 
 """
 canvas = tk.Canvas(root, width = 800, height = 600)#Canvasの作成
@@ -80,16 +82,15 @@ parking = tk.Checkbutton(text='駐車場あり', variable=Val6)
 parking.pack()
 parking.place(x=20,y=200)
 """
-
 class RootWidget(GridLayout):
     def __init__(self, **kwargs):
         super(RootWidget,self).__init__(cols=2)
-
+        #Checkboxを作成
         self.label=Label(text=u"個室あり",font_size = "15sp", font_name = 'ipaexg00201/ipaexg.ttf')
         self.add_widget(self.label)
-        self.checkbox1 = CheckBox()
-        self.checkbox1.bind(active=self.on_checkbox_active)
-        self.add_widget(self.checkbox1)
+        self.private_room = CheckBox()
+        self.private_room.bind(active=self.private_room)
+        self.add_widget(self.private_room)
 
         self.label=Label(text=u"禁煙席あり",font_size = "15sp", font_name = 'ipaexg00201/ipaexg.ttf')
         self.add_widget(self.label)
@@ -120,12 +121,12 @@ class RootWidget(GridLayout):
         self.checkbox6 = CheckBox()
         self.checkbox6.bind(active=self.on_checkbox_active)
         self.add_widget(self.checkbox6)
-
-        self.btn1=Button(text=u"検索",size_hint = (0.5, 0.5),font_size = "15sp", font_name = 'ipaexg00201/ipaexg.ttf')
+        #検索ボタンを作成
+        self.btn1=Button(text=u"検索",size_hint = (0.5, 0.5),font_size = "15sp",font_name = 'ipaexg00201/ipaexg.ttf')
         layout = AnchorLayout(anchor_x='center', anchor_y='center')
         layout.add_widget(self.btn1)
         self.add_widget(layout)
-
+        #終了ボタンを作成
         self.btn2=Button(text=u"終了",size_hint = (0.5, 0.5),font_size = "15sp", font_name = 'ipaexg00201/ipaexg.ttf')
         layout = AnchorLayout(anchor_x='center', anchor_y='center')
         layout.add_widget(self.btn2)
@@ -154,6 +155,21 @@ class App_py(App):
         self.icon = 'IMG_5141.jpg'
         return self.root
 
+class RootWidget(BoxLayout):
+    def __init__(self, **kwargs):
+        super(RootWidget, self).__init__(padding=30, orientation='vertical')
+
+        self.label=Label(text="Time Display")
+        self.add_widget(self.label)
+
+        Clock.schedule_interval(self.TimerCallback, 1.0)
+
+        self.textinput = TextInput(text='Hello world', multiline=False)
+        self.add_widget(self.textinput)
+
+    def TimerCallback(self,dt):
+        time=datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        self.textinput.text=time
 
 """
     def __init__(self, master=None):
@@ -220,8 +236,6 @@ def action(event):
         map_url = "https://www.google.co.jp/maps/place/"
         map_url+=str(s_quote)
         webbrowser.open(map_url)
-        #https://www.google.co.jp/maps/@38.9298578,141.0916917,15z?hl=ja
-        #https://www.google.co.jp/maps/place/%E4%B8%80%E5%8A%9B/@38.9310012,141.136124317z,/data=!3m1!4b1!4m5!3m4!1s0x5f88da9c7dda6fcf:0xdb7e150981ab7b68!8m2!3d38.930997!4d141.138313?hl=ja
 
               
 lb.bind('<<ListboxSelect>>',action)
