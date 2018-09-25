@@ -6,46 +6,54 @@ from kivy.uix.button import Label,Button
 from kivy.config import Config
 from kivy.uix.textinput import TextInput #テキストボックス作成
 from kivy.uix.floatlayout import FloatLayout
+from kivy.core.text import LabelBase, DEFAULT_FONT
+from kivy.resources import resource_add_path
+
 import geocoder
 from bs4 import BeautifulSoup
 import requests
 import webbrowser
 import urllib.parse
+import xml.etree.ElementTree as et
 
-class TestApp(App):
-    def appearance(self):
-#       self.root = Rootapp()
-        self.title = 'Text Input Sample'
-        self.icon = 'IMG_C3A0B03A7006-1.jpeg'
-        return 
+resource_add_path('/Users/euro_c/Documents/Python演習課題/Kivy/ipaexg00201')
+LabelBase.register(DEFAULT_FONT, 'ipaexg00201/ipaexg.ttf')
 
+#class TestApp(App):
 class Rootapp(App):
+    def hoi(self):
+        title = 'Text Input Sample'
+        icon = 'IMG_C3A0B03A7006-1.jpeg'
+
     def build(self):
         layout = FloatLayout()
-        ti = TextInput(text='国会議事堂',multiline=False,font_name = 'ipaexg00201/ipaexg.ttf')
+        ti = TextInput(text='入力してください',multiline=False)
         ti.bind(on_text_validate=self.on_enter)
         layout.add_widget(ti)
         return layout
 
     def on_enter(self, ti):
         print("on_enter[%s]" % (ti.text))
-#        ti = TextInput.get()
-        Localname = ti.text 
-        print(Localname)
+        Localname = ti.text
         #検索する住所
-        g = geocoder.google(Localname)
-    
-        if(g.lat == None):
-            print("Error/nもう一度入力してください") 
-            #error_window = massegebox.showinfo('エラー','値の入力が不正です！')
-        else:
-            print(g.lat,g.lng) 
-            url="http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=2e81cf18f550cb53&range=5&order=5"
-            url=self.update_url(url,g.lat,g.lng)
+        location = requests.get("https://www.geocoding.jp/api?q=" + Localname)
+        res = et.fromstring(location.text)
+        print(res)
+
+        if(res):
+            print(res[2][0].text, res[2][1].text)
+            url="http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=2e81cf18f550cb53&range=5&order=5&lat=" + "&lat=" + res[2][0].text + "&lng=" + res[2][1].text
             print(url)
-            result = requests.get(url) 
-            soup = BeautifulSoup(result.text, "html.parser")
+            result = requests.get(url)
+            # print(result.text)
+            soup = BeautifulSoup(result.text,"html.parser")
+            for shop in soup.findAll('shop'):
+                print(shop.find('name').string)
+                # lb.insert(shop.find('name').string)
+        else:
+            print("Error/nもう一度入力してください") 
+
 
 if __name__ == "__main__":
     Rootapp().run()
-TestApp().run()
+
